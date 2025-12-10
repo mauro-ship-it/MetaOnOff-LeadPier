@@ -1,0 +1,38 @@
+LISTA ORDENADA DE ADSETS CON ROI POSITIVO
+==================================================
+
+Total adsets: 8
+Fecha: 2025-12-09 14:58:25
+
+1. BM5_1_AUTOI9-FP-AUTO_PickOneHouse_Agostina-CCA100BPN_RS
+   Spend: $108.13 | ROI: 62.0% | Profit: $67.06
+   Link: https://www.facebook.com/820752897790132/posts/122113898475056977/
+
+2. BM5_1_AUTOI9-FP-AUTO_StarbucksTariff-V2_Facundo-CC1.1_RS
+   Spend: $109.57 | ROI: 63.3% | Profit: $69.37
+   Link: https://www.facebook.com/820752897790132/posts/122111960673056977/
+
+3. BM5_1_AUTOI9-FP-AUTO_PickOneHouse_Agostina-CCA100-2_RS
+   Spend: $64.98 | ROI: 119.3% | Profit: $77.49
+   Link: https://www.facebook.com/820752897790132/posts/122112694881056977/
+
+4. BM5_1_AUTOI9-FP-Auto_MillionaireXmasNewsVARIANT_Clara-CCBP_RS
+   Spend: $110.49 | ROI: 49.3% | Profit: $54.46
+   Link: https://www.facebook.com/820752897790132/posts/122113900185056977/
+
+5. BM5_1_AUTOI9-FP-AUTO_PickOneHouse_Agostina-CCA711BP_RS
+   Spend: $109.24 | ROI: 48.7% | Profit: $53.15
+   Link: https://www.facebook.com/820752897790132/posts/122113896957056977/
+
+6. BM5_1_AUTOI9-FP-AUTO_PickOneHouse_Agostina-CCA100BP_RS
+   Spend: $123.92 | ROI: 25.4% | Profit: $31.47
+   Link: https://www.facebook.com/820752897790132/posts/122113898463056977/
+
+7. BM5_1_AUTOI9-FP-Auto_BlessesASingleMom_Ivan-CCBPNA711_RS
+   Spend: $114.89 | ROI: 16.9% | Profit: $19.38
+   Link: https://www.facebook.com/820752897790132/posts/122112804093056977/
+
+8. BM5_1_AUTOI10-FP-T-Auto_BlessingPizza_CJ_RS
+   Spend: $68.28 | ROI: 4.6% | Profit: $3.17
+   Link: https://www.facebook.com/865667913292666/posts/122109931869082628/
+
