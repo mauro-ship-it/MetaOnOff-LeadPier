@@ -1,0 +1,34 @@
+# Archivos sensibles - NO SUBIR
+enviorement.env
+*.env
+
+# Archivos de caché y runtime
+leadpier_cache.json
+leadpier_cookies.pkl
+detection_state.json
+cache_*.json
+*.pkl
+*.pyc
+__pycache__/
+
+# Logs
+*.log
+leadpier.log
+
+# Archivos temporales
+*.tmp
+*.temp
+
+# Archivos de IDE
+.vscode/
+.idea/
+*.swp
+*.swo
+
+# Archivos de sistema
+.DS_Store
+Thumbs.db
+
+# Paquetes ZIP generados
+LeadPier_Sistema_Anti_Bloqueo_*.zip
+

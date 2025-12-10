@@ -1,0 +1,119 @@
+========================================================================
+   INICIO RÁPIDO: Ejecutar LeadPier desde tu Móvil durante Viaje
+========================================================================
+
+PROBLEMA:
+   No puedes ejecutar el script en tu laptop suspendida (en la mochila).
+
+SOLUCIÓN:
+   Ejecutar en Google Colab (nube gratuita) - Accesible desde móvil.
+
+========================================================================
+   PASOS (10 minutos)
+========================================================================
+
+1. ABRIR GOOGLE COLAB
+   → Ve a: https://colab.research.google.com/
+   → Inicia sesión con tu cuenta de Google
+
+2. SUBIR NOTEBOOK
+   → File → Upload notebook
+   → Selecciona: LEADPIER_COLAB.ipynb
+
+3. EJECUTAR CELDAS (en orden)
+   → Celda 1: Instalar dependencias [espera 2-3 min]
+   → Celda 2: Montar Google Drive [autoriza con 1 clic]
+   → Celda 3: Subir archivos [selecciona los 7 archivos .py]
+   → Celda 4: Configurar credenciales [edita con tus datos]
+   → Celda 5: Test [verifica que todo esté OK]
+   → Celda 6: EJECUTAR [deja corriendo]
+
+4. LISTO!
+   → Cierra tu laptop
+   → Métela en la mochila
+   → El script corre en la nube
+
+========================================================================
+   DESDE TU MÓVIL (durante el viaje)
+========================================================================
+
+CUANDO COLAB SE DESCONECTE (~cada 12 horas):
+   1. Abre la pestaña de Colab en tu móvil
+   2. Verás mensaje "Reconnect" → Haz clic
+   3. Ejecuta solo la celda 6
+   4. Listo (30 segundos)
+
+VER ESTADÍSTICAS:
+   → Ejecuta la celda 7 (opcional)
+
+========================================================================
+   ARCHIVOS QUE NECESITAS SUBIR (Celda 3)
+========================================================================
+
+   1. leadpiertest1.py
+   2. leadpier_undetected_session.py
+   3. leadpier_cache_manager.py
+   4. cookie_manager.py
+   5. detection_monitor.py
+   6. leadpier_auth.py
+   7. enviorement.env (CON TUS CREDENCIALES)
+
+========================================================================
+   ALTERNATIVA RÁPIDA: EMPAQUETAR TODO
+========================================================================
+
+   Ejecuta antes de viajar:
+   
+   python empaquetar_para_colab.py
+   
+   Esto crea un ZIP con todo. Sube el ZIP a Google Drive y 
+   descomprímelo desde Colab.
+
+========================================================================
+   VENTAJAS
+========================================================================
+
+   ✓ 100% GRATIS (sin tarjeta de crédito)
+   ✓ Accesible desde móvil
+   ✓ Tu laptop puede estar apagada
+   ✓ Solo reconectar 1-2 veces al día (30 segundos)
+   ✓ Todo se guarda en Google Drive automáticamente
+
+========================================================================
+   LIMITACIÓN
+========================================================================
+
+   Se desconecta cada 12 horas (es normal, solo reconecta).
+
+========================================================================
+   PARA SOLUCIÓN PERMANENTE (después del viaje)
+========================================================================
+
+   Lee: GUIA_EJECUTAR_EN_NUBE.md
+   
+   Opciones:
+   - Google Cloud VM ($0 con $300 crédito, 3 meses)
+   - AWS EC2 ($0 gratis, 12 meses)
+   - DigitalOcean ($4-6/mes)
+
+========================================================================
+   AYUDA
+========================================================================
+
+   Todo explicado en detalle en:
+   - RESUMEN_VIAJE.md (resumen completo)
+   - GUIA_EJECUTAR_EN_NUBE.md (todas las opciones)
+   - LEADPIER_COLAB.ipynb (instrucciones paso a paso)
+
+========================================================================
+   RESUMEN ULTRA-CORTO
+========================================================================
+
+   1. Abre: https://colab.research.google.com/
+   2. Sube: LEADPIER_COLAB.ipynb
+   3. Ejecuta: Celdas 1-6
+   4. Reconecta: Cada 12h desde móvil (30 seg)
+   5. ¡Buen viaje! 🎒
+
+========================================================================
+

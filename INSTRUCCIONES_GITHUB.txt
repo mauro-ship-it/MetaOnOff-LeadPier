@@ -1,0 +1,214 @@
+========================================================================
+   INSTRUCCIONES PARA SUBIR A GITHUB Y EJECUTAR EN TU PC
+========================================================================
+
+YA HICISTE:
+   ✓ git init
+
+========================================================================
+   PASO 1: CREAR REPOSITORIO EN GITHUB
+========================================================================
+
+1. Ve a: https://github.com/new
+
+2. Configura:
+   - Repository name: MetaOnOff-LeadPier (o el nombre que quieras)
+   - Description: Sistema Anti-Bloqueo LeadPier
+   - Private: ✓ (RECOMENDADO - es código privado con tu lógica de negocio)
+   - NO inicialices con README (ya tienes uno)
+
+3. Haz clic en "Create repository"
+
+4. Copia la URL que aparece (ej: https://github.com/tu-usuario/MetaOnOff-LeadPier.git)
+
+========================================================================
+   PASO 2: SUBIR CÓDIGO A GITHUB (En tu PC actual)
+========================================================================
+
+Abre PowerShell en la carpeta "Mainteinance and Scaling" y ejecuta:
+
+# Verificar que .gitignore existe
+cat .gitignore
+
+# Agregar todos los archivos (excepto los de .gitignore)
+git add .
+
+# Verificar qué se va a subir (enviorement.env NO debe aparecer)
+git status
+
+# Si enviorement.env aparece, eliminarlo:
+git rm --cached enviorement.env
+
+# Hacer commit
+git commit -m "Sistema Anti-Bloqueo LeadPier - Version inicial"
+
+# Conectar con GitHub (reemplaza con TU URL)
+git remote add origin https://github.com/TU-USUARIO/TU-REPO.git
+
+# Subir código
+git push -u origin main
+
+# Si el branch se llama "master" en lugar de "main":
+# git branch -M main
+# git push -u origin main
+
+========================================================================
+   PASO 3: CLONAR Y EJECUTAR EN TU PC
+========================================================================
+
+En tu PC, abre PowerShell en cualquier carpeta y ejecuta:
+
+# Clonar repositorio
+git clone https://github.com/TU-USUARIO/TU-REPO.git
+
+# Entrar a la carpeta
+cd TU-REPO
+
+# Instalar dependencias
+pip install -r requirements.txt
+
+# Copiar archivo de ejemplo de credenciales
+copy enviorement.env.example enviorement.env
+
+# Editar credenciales (abrirá Notepad)
+notepad enviorement.env
+
+# (Pega tus credenciales reales en el archivo y guarda)
+
+# EJECUTAR
+python leadpiertest1.py
+
+========================================================================
+   PASO 4: VERIFICAR QUE FUNCIONA
+========================================================================
+
+Deberías ver:
+
+🚀 Iniciando sistema LeadPier...
+⏰ Ejecutando cada 10 minutos
+📱 Mantén esta pestaña abierta en tu móvil
+
+=== RUN 2025-12-10 XX:XX:XX UTC ===
+[AUTH] Validando bearer token de Leadpier...
+[AUTH] Token válido ✓
+[Leadpier] Obteniendo datos...
+[OK] Datos de Leadpier obtenidos: XX registros
+
+Si ves esto → ✅ FUNCIONA PERFECTAMENTE en tu PC
+
+========================================================================
+   COMANDOS RÁPIDOS GIT
+========================================================================
+
+# Ver estado actual
+git status
+
+# Subir cambios nuevos
+git add .
+git commit -m "Descripción de cambios"
+git push
+
+# Actualizar desde GitHub
+git pull
+
+# Ver historial
+git log --oneline
+
+========================================================================
+   VENTAJAS DE EJECUTAR EN TU PC vs COLAB
+========================================================================
+
+✅ Chrome funciona sin problemas (no necesitas fix)
+✅ Más rápido y confiable
+✅ Más fácil de debuggear
+✅ Puedes ver el navegador si quitas headless
+✅ Acceso a todos los archivos localmente
+✅ No se desconecta cada 12 horas
+
+Desventaja:
+❌ Tu PC debe estar encendida (o usar servidor en la nube)
+
+========================================================================
+   PARA EJECUTAR 24/7 SIN TU PC
+========================================================================
+
+Después de verificar que funciona en tu PC, puedes migrar a:
+
+Opción 1 - Google Cloud VM:
+   - $300 gratis por 3 meses
+   - Clonas el repo en la VM
+   - Ejecutas con tmux
+   - Ver: GUIA_EJECUTAR_EN_NUBE.md
+
+Opción 2 - AWS EC2:
+   - Gratis 12 meses
+   - Mismo proceso
+   - Ver: GUIA_EJECUTAR_EN_NUBE.md
+
+========================================================================
+   SEGURIDAD IMPORTANTE
+========================================================================
+
+⚠️  NUNCA hagas esto:
+
+   git add enviorement.env
+   
+   (El .gitignore lo protege automáticamente, pero por si acaso)
+
+✅ SIEMPRE verifica antes de push:
+
+   git status
+   
+   enviorement.env NO debe aparecer en la lista
+
+========================================================================
+   SI YA SUBISTE enviorement.env POR ERROR
+========================================================================
+
+1. Eliminarlo del historial:
+   git rm --cached enviorement.env
+   git commit -m "Remover credenciales"
+   git push
+
+2. Cambiar TODAS tus credenciales inmediatamente:
+   - Generar nuevo token de Facebook
+   - Obtener nuevo token de LeadPier
+   - Cambiar password de LeadPier (opcional pero recomendado)
+
+3. Considerar hacer el repositorio privado si es público
+
+========================================================================
+   RESUMEN DE ARCHIVOS
+========================================================================
+
+SE SUBEN A GITHUB:
+   ✓ Todos los archivos .py
+   ✓ requirements.txt
+   ✓ README.md
+   ✓ .gitignore
+   ✓ enviorement.env.example
+   ✓ Toda la documentación .md
+   ✓ LEADPIER_COLAB.ipynb
+
+NO SE SUBEN (protegidos por .gitignore):
+   ✗ enviorement.env (CREDENCIALES)
+   ✗ leadpier_cache.json
+   ✗ leadpier_cookies.pkl
+   ✗ detection_state.json
+   ✗ Archivos .pyc, __pycache__
+
+========================================================================
+   PRÓXIMOS PASOS
+========================================================================
+
+1. Ejecuta los comandos de PASO 2 (git add, commit, push)
+2. Ve a GitHub y verifica que todo se subió
+3. En tu PC, clona el repo (PASO 3)
+4. Configura credenciales
+5. Ejecuta: python leadpiertest1.py
+6. ✅ LISTO - Funcionará perfectamente
+
+========================================================================
+
+¿Dudas? Todo está documentado en README.md del repositorio.
+

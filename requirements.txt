@@ -1,0 +1,9 @@
+requests
+pandas
+python-dotenv
+schedule
+selenium>=4.15.0
+selenium-wire>=5.1.0
+webdriver-manager>=4.0.0
+undetected-chromedriver>=3.5.5
+

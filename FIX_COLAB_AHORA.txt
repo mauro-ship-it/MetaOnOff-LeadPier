@@ -1,0 +1,208 @@
+========================================================================
+   FIX RÁPIDO PARA TU SESIÓN ACTUAL DE COLAB
+========================================================================
+
+PROBLEMA:
+   Chrome no inicia en Colab (error DevToolsActivePort)
+
+SOLUCIÓN:
+   Ejecuta estos comandos en una nueva celda de Colab
+
+========================================================================
+   PASOS (5 minutos)
+========================================================================
+
+1. CREA UNA NUEVA CELDA en tu Colab (botón + Code)
+
+2. COPIA Y PEGA este código completo:
+
+```python
+# ========== FIX PARA CHROME EN COLAB ==========
+
+from selenium.webdriver.chrome.options import Options
+from selenium import webdriver
+from selenium.webdriver.chrome.service import Service
+import tempfile
+
+def get_colab_chrome_options():
+    """Opciones de Chrome para Colab"""
+    options = Options()
+    
+    # CRÍTICO para Colab
+    options.add_argument('--headless=new')
+    options.add_argument('--no-sandbox')
+    options.add_argument('--disable-dev-shm-usage')
+    options.add_argument('--disable-gpu')
+    options.add_argument('--disable-software-rasterizer')
+    options.add_argument('--disable-extensions')
+    options.add_argument('--disable-setuid-sandbox')
+    options.add_argument('--single-process')
+    options.add_argument('--no-zygote')
+    
+    # User agent
+    options.add_argument('--user-agent=Mozilla/5.0 (X11; Linux x86_64) AppleWebKit/537.36')
+    
+    # Anti-detección
+    options.add_argument('--disable-blink-features=AutomationControlled')
+    options.add_experimental_option("excludeSwitches", ["enable-automation"])
+    options.add_experimental_option('useAutomationExtension', False)
+    
+    options.add_argument(f'--user-data-dir={tempfile.mkdtemp()}')
+    
+    return options
+
+# Parchear leadpier_auth
+import leadpier_auth
+
+def colab_auto_login(email=None, password=None, headless=True):
+    """Login adaptado para Colab"""
+    from selenium.webdriver.common.by import By
+    from selenium.webdriver.support.ui import WebDriverWait
+    from selenium.webdriver.support import expected_conditions as EC
+    import os, time
+    
+    email = email or os.getenv('LEADPIER_EMAIL')
+    password = password or os.getenv('LEADPIER_PASSWORD')
+    
+    print(f"[COLAB] Iniciando login...")
+    
+    options = get_colab_chrome_options()
+    service = Service('/usr/bin/chromedriver')
+    driver = webdriver.Chrome(service=service, options=options)
+    driver.set_page_load_timeout(30)
+    
+    try:
+        driver.get("https://dash.leadpier.com/login")
+        time.sleep(3)
+        
+        # Email
+        email_input = WebDriverWait(driver, 10).until(
+            EC.presence_of_element_located((By.CSS_SELECTOR, "input[type='email']"))
+        )
+        email_input.send_keys(email)
+        time.sleep(1)
+        
+        # Password
+        password_input = driver.find_element(By.CSS_SELECTOR, "input[type='password']")
+        password_input.send_keys(password)
+        time.sleep(1)
+        
+        # Submit
+        submit_button = driver.find_element(By.CSS_SELECTOR, "button[type='submit']")
+        submit_button.click()
+        time.sleep(5)
+        
+        # Extraer token
+        token = driver.execute_script("""
+            try {
+                const auth = JSON.parse(localStorage.getItem('authentication'));
+                return auth ? auth.token : null;
+            } catch (e) {
+                return null;
+            }
+        """)
+        
+        driver.quit()
+        
+        if token:
+            print(f"[COLAB] ✅ Token obtenido")
+            return token
+        else:
+            print("[COLAB] ❌ No se pudo obtener token")
+            return None
+    except Exception as e:
+        print(f"[COLAB] Error: {e}")
+        try:
+            driver.quit()
+        except:
+            pass
+        return None
+
+# Reemplazar función
+leadpier_auth.auto_login_leadpier = colab_auto_login
+
+# Parchear undetected_session
+try:
+    from leadpier_undetected_session import LeadPierUndetectedSession
+    
+    def colab_create_driver(self):
+        print("[COLAB] Creando driver...")
+        options = get_colab_chrome_options()
+        service = Service('/usr/bin/chromedriver')
+        driver = webdriver.Chrome(service=service, options=options)
+        self.setup_stealth(driver)
+        return driver
+    
+    LeadPierUndetectedSession._create_undetected_driver = colab_create_driver
+    print("✅ Undetected session parcheado")
+except:
+    pass
+
+print("\n✅ FIX APLICADO - Ahora ejecuta tu script\n")
+```
+
+3. EJECUTA esa celda (Shift+Enter)
+
+4. Verás: "✅ FIX APLICADO - Ahora ejecuta tu script"
+
+5. AHORA SÍ ejecuta la celda 6 (EJECUTAR SCRIPT PRINCIPAL)
+
+========================================================================
+   ¿QUÉ HACE ESTE FIX?
+========================================================================
+
+- Agrega las opciones necesarias para Chrome en Colab
+  (--no-sandbox, --disable-dev-shm-usage, etc)
+
+- Reemplaza las funciones de login para usar estas opciones
+
+- Hace que el sistema funcione en el ambiente de Colab
+
+========================================================================
+   ALTERNATIVA: USAR NOTEBOOK ACTUALIZADO
+========================================================================
+
+Si prefieres empezar de cero:
+
+1. Descarga el archivo actualizado: LEADPIER_COLAB.ipynb
+2. Súbelo a Colab (reemplaza el anterior)
+3. Ejecuta las celdas 1-6 en orden
+4. El fix está incluido en la celda 3.5
+
+========================================================================
+   SI AÚN ASÍ FALLA
+========================================================================
+
+Opción 1 - Actualizar token manualmente:
+
+1. Ve a: https://dash.leadpier.com
+2. Inicia sesión
+3. F12 → Console
+4. Ejecuta: JSON.parse(localStorage.getItem('authentication')).token
+5. Copia el token
+6. En Colab, ejecuta:
+
+   !echo "LEADPIER_BEARER=tu_token_aqui" >> enviorement.env
+
+7. Re-ejecuta el script
+
+Opción 2 - Continuar sin LeadPier:
+
+El script puede funcionar solo con datos de Facebook.
+Los adsets se gestionarán basándose únicamente en métricas de FB.
+
+========================================================================
+   PRÓXIMOS PASOS
+========================================================================
+
+Una vez que el fix funcione:
+
+1. El script se ejecutará normalmente
+2. Verás logs de obtención de datos
+3. Se pausarán/escalarán adsets según reglas
+4. Se ejecuta cada 10 minutos automáticamente
+
+========================================================================
+
+¿Necesitas ayuda? Pega el error que aparece después de aplicar el fix.
+
